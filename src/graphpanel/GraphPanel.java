@@ -297,18 +297,20 @@ public class GraphPanel extends JPanel implements MouseWheelListener, MouseListe
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		int mouseRotation = e.getWheelRotation();
-		java.awt.Point point = e.getPoint();
-		double d = (double) mouseRotation * 1.2;
-		d = (mouseRotation > 0) ? 1 / d : -d;
-
-		int w = (int) (getWidth() * d);
-		int h = (int) (getHeight() * d);
-		this.preferredSize.setSize(w, h);
-
-		int offX = (int) (point.x * d) - point.x;
-		int offY = (int) (point.y * d) - point.y;
-		setLocation(getLocation().x - offX, getLocation().y - offY);
-
-		getParent().doLayout();
+			if (mouseRotation != 0) {
+			java.awt.Point point = e.getPoint();
+			double d = (double) mouseRotation * 1.2;
+			d = (mouseRotation > 0) ? 1 / d : -d;
+	
+			int w = (int) (getWidth() * d);
+			int h = (int) (getHeight() * d);
+			this.preferredSize.setSize(w, h);
+	
+			int offX = (int) (point.x * d) - point.x;
+			int offY = (int) (point.y * d) - point.y;
+			setLocation(getLocation().x - offX, getLocation().y - offY);
+	
+			getParent().doLayout();
+		}
 	}
 }
